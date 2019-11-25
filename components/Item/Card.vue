@@ -1,5 +1,5 @@
 <template>
-  <v-card :to="`/item/${item.productUUID}/${item.uuid}`">
+  <v-card :to="`/item/${item.uuid}`">
     <v-card-title>{{ item.name }}</v-card-title>
     <v-img :src="imgSrc" if="!!item.image" />
     <v-card-text>{{ item.count }}個</v-card-text>

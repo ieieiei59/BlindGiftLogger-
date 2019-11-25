@@ -41,6 +41,11 @@ export default class GiftLog {
     return db.GiftLogs.put(this.json())
   }
 
+  delete () {
+    this.getItem().then((item) => { item.decrease() })
+    return db.GiftLogs.delete(this.uuid)
+  }
+
   static all () {
     return db.GiftLogs.toArray()
       .then((arr) => {

@@ -41,11 +41,24 @@ export default class Product {
   }
 
   delete () {
+    this.getItems().then((items) => {
+      for (const item of items) {
+        item.delete()
+      }
+    })
     return db.Products.delete(this.uuid)
   }
 
   increase () {
     this.count += 1
+    this.save()
+  }
+
+  decrease () {
+    this.count -= 1
+    if (this.count < 0) {
+      this.count = 0
+    }
     this.save()
   }
 

@@ -48,6 +48,17 @@ export default class Item {
     })
   }
 
+  decrease () {
+    this.count -= 1
+    if (this.count < 0) {
+      this.count = 0
+    }
+    this.getProduct().then((product) => {
+      product.decrease()
+    })
+    this.save()
+  }
+
   sumPrice () {
     return this.count * this.price
   }
@@ -95,6 +106,18 @@ export default class Item {
   }
 
   delete () {
+    this.getGiftLogs().then((arr) => {
+      for (const log of arr) {
+        log.delete()
+      }
+    })
+    this.getProduct().then((product) => {
+      product.count -= this.count
+      if (product.count < 0) {
+        product.count = 0
+      }
+      product.save()
+    })
     db.Items.delete(this.uuid)
   }
 

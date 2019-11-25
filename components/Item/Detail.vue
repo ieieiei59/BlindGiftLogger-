@@ -5,6 +5,7 @@
       <v-card-text v-if="item.spText">
         {{ item.spText }}
       </v-card-text>
+      <v-img :src="imgSrc" v-if="!!imgSrc" />
       <v-card-text>{{ item.count }}個取得済み [計: {{ item.sumPrice() }}円]</v-card-text>
       <v-card-actions>
         <v-btn @click="createLog">
@@ -33,7 +34,8 @@ export default {
   data () {
     return {
       item: null,
-      giftLogs: []
+      giftLogs: [],
+      imgSrc: ''
     }
   },
   computed: {
@@ -56,6 +58,7 @@ export default {
         this.item.getGiftLogs().then((arr) => {
           this.giftLogs = arr
         })
+        this.setImageURL()
       })
   },
   methods: {
@@ -66,6 +69,13 @@ export default {
     createLog () {
       const log = this.item.purchase()
       this.giftLogs.push(log)
+    },
+    setImageURL () {
+      const fr = new FileReader()
+      fr.onload = () => {
+        this.imgSrc = fr.result
+      }
+      fr.readAsDataURL(this.item.getImageData())
     }
   }
 }

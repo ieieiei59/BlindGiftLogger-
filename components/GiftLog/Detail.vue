@@ -18,7 +18,7 @@
 <script>
 import GiftLog from '@/models/GiftLog'
 export default {
-  name: 'ProductDetail',
+  name: 'GiftLogDetail',
   props: ['uuid'],
   data () {
     return {
@@ -36,8 +36,10 @@ export default {
   },
   methods: {
     deleteGiftLog () {
+      console.log(this.giftLog)
       this.giftLog.delete()
-      this.$router.push('/gift_log')
+      this.$router.replace('/item/' + this.item.uuid)
+      this.$router.go(-1)
     }
   }
 }
