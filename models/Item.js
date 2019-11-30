@@ -63,6 +63,10 @@ export default class Item {
     return this.count * this.price
   }
 
+  sumValue () {
+    return this.count * this.value
+  }
+
   /**
    * 一つあたりの 値段(円) を取得
    */
@@ -135,11 +139,19 @@ export default class Item {
    * @param {Object} data
    */
   static create (data) {
+    console.log(data)
     if (!('uuid' in data)) {
       data.uuid = uuidv4()
     }
     const item = new Item(data)
-    item.save()
+    if (data.price === null) {
+      item.getProduct().then((product) => {
+        item.price = product.price
+        item.save()
+      })
+    } else {
+      item.save()
+    }
     return item
   }
 

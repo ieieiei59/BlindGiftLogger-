@@ -25,6 +25,18 @@ export default class Product {
     return Item.filterByProduct(this.uuid)
   }
 
+  sumPrice () {
+    return this.getItems().then((items) => {
+      return items.reduce((prevVal, item) => prevVal + item.sumPrice(), 0)
+    })
+  }
+
+  sumValue () {
+    return this.getItems().then((items) => {
+      return items.reduce((prevVal, item) => prevVal + item.sumValue(), 0)
+    })
+  }
+
   json () {
     return {
       uuid: this.uuid,

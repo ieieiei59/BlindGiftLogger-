@@ -70,6 +70,15 @@ export default {
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
+        },
+        newTheme: {
+          primary: '#8bc34a',
+          secondary: '#ff9800',
+          accent: '#ffeb3b',
+          error: '#e91e63',
+          warning: '#ff5722',
+          info: '#cddc39',
+          success: '#00bcd4'
         }
       }
     }

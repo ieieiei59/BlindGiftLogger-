@@ -6,14 +6,13 @@
         {{ item.spText }}
       </v-card-text>
       <v-img :src="imgSrc" v-if="!!imgSrc" />
-      <v-card-text>{{ item.count }}個取得済み [計: {{ item.sumPrice() }}円]</v-card-text>
-      <v-card-actions>
-        <v-btn @click="createLog">
-          記録
-        </v-btn>
-        <v-btn @click="deleteItem()" color="red">
-          削除
-        </v-btn>
+      <v-card-text>{{ item.count }}個取得済み [計: {{ item.sumPrice() }}円] (合計価値: {{ item.sumValue() }})</v-card-text>
+      <v-btn @click="createLog">
+        記録
+      </v-btn>
+      <v-btn @click="deleteItem()" color="red">
+        削除
+      </v-btn>
       </v-card-actions>
     </v-card>
     <h3>ログ</h3>

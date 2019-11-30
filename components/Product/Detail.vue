@@ -5,7 +5,8 @@
       <v-card-text v-if="productObj.spText">
         {{ productObj.spText }}
       </v-card-text>
-      <v-card-text>{{ productObj.count }}個取得済み [計: {{ productObj.count * productObj.price }} 円]</v-card-text>
+      <v-card-text>{{ productObj.count }}個取得済み [計: {{ sumPrice }} 円] (合計価値: {{ sumValue }})</v-card-text>
+      <v-card-text>全{{ items.length }}種類</v-card-text>
       <v-card-actions>
         <v-btn :to="`/item/add/${productObj.uuid}`">
           アイテムを追加
@@ -33,7 +34,9 @@ export default {
   data () {
     return {
       productObj: null,
-      items: []
+      items: [],
+      sumPrice: 0,
+      sumValue: 0
     }
   },
   created () {
@@ -43,6 +46,9 @@ export default {
         .then((arr) => {
           this.items = arr
         })
+      this.setSumPrice()
+      console.log('asdlkj')
+      this.setSumValue()
     })
   },
   methods: {
@@ -52,6 +58,14 @@ export default {
       })
       this.productObj.delete()
       this.$router.push('/product')
+    },
+    setSumPrice () {
+      this.productObj.sumPrice()
+        .then((val) => { this.sumPrice = val })
+    },
+    setSumValue () {
+      this.productObj.sumValue()
+        .then((val) => { this.sumValue = val })
     }
   }
 }

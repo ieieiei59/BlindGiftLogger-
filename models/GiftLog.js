@@ -59,7 +59,7 @@ export default class GiftLog {
       itemUUID
     }
     const log = new GiftLog(data)
-    console.log(log)
+    // console.log(log)
     log.save()
     return log
   }
@@ -74,7 +74,7 @@ export default class GiftLog {
   static filterByItem (itemUUID) {
     return db.GiftLogs.where({ itemUUID }).toArray()
       .then((arr) => {
-        console.log(arr)
+        // console.log(arr)
         return arr.map(obj => new GiftLog(obj))
       })
   }
