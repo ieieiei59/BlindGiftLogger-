@@ -1,6 +1,6 @@
 <template>
   <div>
-    <gift-log-list/>
+    <gift-log-list />
   </div>
 </template>
 

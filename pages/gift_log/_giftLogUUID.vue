@@ -1,6 +1,6 @@
 <template>
   <div>
-    <gift-log-detail :uuid="giftLogUUID"/>
+    <gift-log-detail :uuid="giftLogUUID" />
   </div>
 </template>
 
