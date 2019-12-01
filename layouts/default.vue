@@ -91,6 +91,11 @@ export default {
           icon: 'mdi-post',
           title: 'GiftLog',
           to: '/gift_log'
+        },
+        {
+          icon: 'mdi-swap-vertical-bold',
+          title: 'I/O',
+          to: '/io'
         }
       ],
       miniVariant: false,
