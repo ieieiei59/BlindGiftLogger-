@@ -1,18 +1,38 @@
 <template>
-  <v-card v-if="(!!giftLog) && (!!item)">
-    <v-card-title>{{ item.name }}</v-card-title>
-    <v-card-text v-if="item.spText">
-      {{ item.spText }}
-    </v-card-text>
-    <v-card-text v-if="giftLog">
-      {{ giftLog.addedAtStr() }}
-    </v-card-text>
-    <v-card-actions>
-      <v-btn @click="deleteGiftLog()" color="red">
-        削除
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+  <div>
+    <v-card v-if="(!!giftLog) && (!!item)">
+      <v-card-title>{{ item.name }}</v-card-title>
+      <v-card-text v-if="item.spText">
+        {{ item.spText }}
+      </v-card-text>
+      <v-card-text v-if="giftLog">
+        {{ giftLog.addedAtStr() }}
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="red" @click="deleteDialog = true">
+          削除
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+
+    <v-dialog v-model="deleteDialog">
+      <v-card>
+        <v-card-title>削除確認ダイアログ</v-card-title>
+        <v-card-text v-if="!!item">
+          {{ item.name }}[ギフトログ] が削除されます。
+        </v-card-text>
+        <v-card-text>よろしいですか？</v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" @click="deleteDialog = false">
+            削除しない
+          </v-btn>
+          <v-btn color="red" @click="deleteGiftLog()">
+            削除
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 
 <script>
@@ -22,6 +42,7 @@ export default {
   props: ['uuid'],
   data () {
     return {
+      deleteDialog: false,
       giftLog: null,
       item: null
     }
